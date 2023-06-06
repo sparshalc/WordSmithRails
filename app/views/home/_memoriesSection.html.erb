@@ -1,0 +1,45 @@
+<style>
+
+    #hero{
+        background: linear-gradient(#3a8ff7c8, #2382f6);
+        overflow: hidden; 
+        height: 64vh;
+    }
+    .headerText{
+        color: white;
+        font-weight: 600;
+        font-size: 100px;
+    }
+    .headerText span{
+        font-weight: 800;
+    }
+    p.headerParagraph{
+        color: white;
+        font-size: 20px;
+        font-size: 20px;
+    }
+    .h1{
+        color: white;
+    }
+    section.memoryBox{
+      margin-top: 20px ;
+    }
+  </style>
+  
+  <section id="hero" class="hero d-flex align-items-center section-bg memoryBox">
+    <div  class="container">
+      <div class="row justify-content-between gy-5">
+        <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center align-items-center align-items-lg-start text-center text-lg-start">
+          <h1 data-aos="fade-up" data-aos-delay="100"  class="headerText" ><span>Hang on to <br> Memories!</span></h1>
+          <p data-aos="fade-up" data-aos-delay="200" class="headerParagraph">Save the moments that matter. wordSmith lets you safely store thousands of posts, photos, and more.</p>
+        </div>
+        <div class="col-lg-5 order-1 order-lg-2 text-center text-lg-start">
+          <%= image_tag('img/memo.png', width: '580px', 'data-aos': "fade-up", 'data-aos-delay': "500")%>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  

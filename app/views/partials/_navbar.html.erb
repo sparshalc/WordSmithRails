@@ -1,0 +1,72 @@
+<style>
+  .navImg:hover{
+    rotate: -15deg;
+    scale: 1.1;
+    transition: 0.2s ease-in-out;
+  }
+  .btn-custom{
+    background: linear-gradient(#3a8ff7c8, #2382f6);
+    color: white;
+  }
+  .btn-custom:hover{
+    color: white;
+  }
+</style>
+<header class="p-3 border-bottom">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="/" class="d-flex align-items-center mb-0 mb-lg-0 link-body-emphasis text-decoration-none">
+           <a href="/"><%= image_tag('img/pen.png', class: 'navImg', width: '30px')%></a>
+        </a>
+        <% if user_signed_in? %>
+          <ul class="nav col-12 col-lg-auto me-lg-auto mb-3 justify-content-center mb-md-0">
+            <%= link_to 'Home', root_path, class:'nav-link px-3 link-body-emphasis'%>
+            <%= link_to 'Write', new_blog_path, class:'nav-link px-3 link-body-emphasis'%>
+            <%= link_to 'Blogs', blogs_path, class:'nav-link px-3 link-body-emphasis'%>
+          </ul>
+
+          <% if params[:controller] == 'blogs' && params[:action] == 'index' %>
+            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+              <%= search_form_for @q do |f| %>
+              <%= f.search_field :title_cont,:placeholder => 'Search by name...',class:'form-control' %>
+              <% end %>
+            </form>
+          <% else %>
+          <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 mt-3">
+            <p><strong><%= current_user.email %></strong></p>
+          </form>
+          <% end %>
+        <% end %>
+        <% if user_signed_in? %>
+          <% if current_user.image.attached? %>
+          <div class="dropdown text-end">
+            <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <%= image_tag(current_user.image, width:"32", height:"32", class:"rounded-circle")%>
+            </a>
+            <ul class="dropdown-menu text-small">
+            <li><%= link_to 'Settings', main_app.edit_user_registration_path,class:"dropdown-item"%></li>
+            <li> <%= button_to 'Logout',main_app.destroy_user_session_path,class:'dropdown-item text-danger',method: :delete%></li>
+            </ul>
+            </div>
+          <% else %>
+            <div class="dropdown text-end">
+            <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="https://avatars.githubusercontent.com/u/116902652?v=4" alt="mdo" width="32" height="32" class="rounded-circle">
+            </a>
+            <ul class="dropdown-menu text-small">
+            <li><%= link_to 'Settings', main_app.edit_user_registration_path,class:"dropdown-item"%></li>
+            <li> <%= button_to 'Logout',main_app.destroy_user_session_path,class:'dropdown-item text-danger',method: :delete%></li>
+            </ul>
+            </div>
+          <% end %>
+        <% end %>
+        <% if !user_signed_in? %>
+          <% if params[:controller] == 'home' && params[:action] == 'index' %>
+            <div class="col-md-11 text-end">
+              <%= link_to 'Get Started', about_us_path,class: 'btn btn-custom'%>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+</header>

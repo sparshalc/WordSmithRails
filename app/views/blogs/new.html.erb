@@ -1,0 +1,75 @@
+<style>
+    .publishLogo{
+        width: 50px;
+        height: 50px;
+        transform: rotate(-1deg);
+    }
+    
+        .newFormTitle{
+        padding: 15px 15px;
+        text-align: center;
+        margin-top: 15px;
+    }
+    .button{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    span{
+        font-weight: 600;
+    }
+    h1{
+        font-weight: 900;
+    }
+    span.header{
+        background: linear-gradient(#2475d8c1, #327cd7c0);
+        padding: 15px 18px;
+        border-radius: 20px;
+        color: white;
+    }
+</style>
+<%= render 'blogs/newCarousel'%>
+<div  class="container">
+    <%= form_with model: @blog do |blog|%>
+        <%= blog.text_field :title, class:'form-control titleForm mt-4', placeholder: 'Enter Blog Title here....'%>
+            <% if @blog.errors.any? %>
+                <div class="text">
+                    <% @blog.errors.full_messages_for(:title).each do |message| %>
+                        <div class="text-danger"><%= message %></div>
+                    <% end %>
+                </div>
+            <% end %>
+            
+        <%= blog.text_area :description, cols: 980,  rows: "15", class:'form-control mt-2', placeholder: 'Enter Blog Description here....'%>
+        <% if @blog.errors.any? %>
+        <div class="text">
+            <% @blog.errors.full_messages_for(:description).each do |message| %>
+                <div class="text-danger"><%= message %></div>
+            <% end %>
+        </div>
+        <% end %>
+
+        <%= blog.file_field :image, class:'form-control mt-2', accept:'image/*'%>
+        <% if @blog.errors.any? %>
+        <div class="text">
+            <% @blog.errors.full_messages_for(:image).each do |message| %>
+                <div class="text-danger"><%= message %></div>
+            <% end %>
+        </div>
+        <% end %>
+
+        <%= blog.text_field :category, class:'form-control titleForm mt-2', placeholder: 'Enter categories, by separating with a comma. '%>
+        <% if @blog.errors.any? %>
+            <div class="text">
+                <% @blog.errors.full_messages_for(:title).each do |message| %>
+                    <div class="text-danger"><%= message %></div>
+                <% end %>
+            </div>
+        <% end %>
+
+        <%= blog.number_field :user_id, value: current_user.id,id: 'blog_user_id',class: 'form-control mt-2',type: :hidden%>
+        <div class="button">
+        <%= blog.submit "Publish Now", class: 'btn btn-primary mt-4'%>
+        </div>
+    <% end %>   
+</div>

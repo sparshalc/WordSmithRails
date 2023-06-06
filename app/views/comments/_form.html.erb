@@ -1,0 +1,18 @@
+<div class="container">
+    <section class="mb-5">
+        <div class="card bg-light">
+            <div class="card-body">
+                <!-- Comment form-->
+                <%= form_for([@blog, @blog.comments.build]) do |f| %>
+                 <%= f.text_area :title, class: 'form-control',rows: "3", placeholder: "Join the discussion and leave a comment!"%>
+                <%= f.submit  data: { turbo: "false" }, class: ' btn btn-dark mt-2 my-2'%>
+
+                <% end %>
+                <!-- Single comment-->
+                <div class="mt-4">
+                 <%= render 'comments/comment'%>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

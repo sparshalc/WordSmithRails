@@ -1,0 +1,57 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-8">
+            <article>
+                <header class="mb-4">
+                    <h1 class="fw-bolder mb-1">
+                        <%= @blog.title %>
+                    </h1>
+                    <div class="text-muted fst-italic mb-2">Posted on <%= time_ago_in_words(@blog.created_at)%>, 2023 by
+                            <%= @blog.user.email%>
+                    </div>
+                    <% if @blog.category.present? %>
+                        <div class="badge bg-secondary text-decoration-none link-light">
+                            <%= @blog.category.match(/^([^,]+),\s*(.+)/)%>
+                        </div>
+                        <% end %>
+                </header>
+                <figure class="mb-4">
+                    <%= image_tag(@blog.image,class: "img-fluid rounded" )%>
+                </figure>
+                <section class="mb-1">
+                    <p class=" mb-4">
+                        <%= simple_format(@blog.description) %>
+                    </p>
+                </section>
+                <%= link_to 'Go Back' , :back, class:'btn btn-dark', class:'btn btn-dark mx-1'%>
+            </article>
+        </div>
+        <div class="col-lg-4">
+            <div class="card mb-4">
+                <div class="card-header">BlogDetails</div>
+                <div class="card-body">This blog was published by <%= @blog.user.email %>
+                        <%= time_ago_in_words(@blog.created_at)%> and has about <%= pluralize(@blog.views, 'view' ) %>
+                                .The blog has <%= @blog.description.scan(/\S+/).size %> words, with a reading time
+                                    estimate of <%= @blog.description.scan(/\S+/).size * 0.008 %> minute.</div>
+            </div>
+            <% if current_user.id==@blog.user.id%>
+                <div class="card mb-4">
+                    <div class="card-header">Admin Control (<%= @blog.user.email%>)</div>
+                    <div class="card-body">
+                        <div class="input-group">
+                                <div class="d-flex">
+                                        <%= link_to 'Edit' , edit_blog_path(@blog.id), class:'btn btn-dark mx-1'%>
+                                            <%= button_to 'Destroy' , blog_path(@blog.id), class:'btn btn-danger', data:
+                                                {'turbo-method': :delete}, data: { turbo: "false" }, method: :delete%>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div>
+
+<div class="mt-3">
+    <%= render 'comments/form' %>
+</div>

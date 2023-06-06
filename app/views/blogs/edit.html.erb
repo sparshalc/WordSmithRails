@@ -1,0 +1,61 @@
+<style>
+    .newFormTitle{
+        padding: 15px 15px;
+        text-align: center;
+        margin-top: 15px;
+    }
+    .button{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    span{
+        font-weight: 900;
+    }
+    h2{
+        font-weight: 600;
+    }
+</style>
+<div class="section-title">
+    <h1 class="newFormTitle">Publish <span>NewBlog</span></h1>
+</div>
+<div class="container">
+    <%= form_with model: @blog do |blog|%>
+        <%= blog.text_field :title, class:'form-control titleForm', placeholder: 'Enter Blog Title here....'%>
+        <% if @blog.errors.any? %>
+        <div class="text">
+            <% @blog.errors.full_messages_for(:title).each do |message| %>
+                <div class="text-danger"><%= message %></div>
+            <% end %>
+        </div>
+    <% end %>
+        <%= blog.text_area :description, cols: 980,  rows: "15", class:'form-control mt-2', placeholder: 'Enter Blog Description here....'%>
+        <% if @blog.errors.any? %>
+        <div class="text">
+            <% @blog.errors.full_messages_for(:description).each do |message| %>
+                <div class="text-danger"><%= message %></div>
+            <% end %>
+        </div>
+    <% end %>
+        <%= blog.number_field :user_id, value: current_user.id,id: 'blog_user_id',class: 'form-control mt-2', type: :hidden%>
+        <%= blog.file_field :image, class:'form-control mt-2'%>
+        <% if @blog.errors.any? %>
+        <div class="text">
+            <% @blog.errors.full_messages_for(:image).each do |message| %>
+                <div class="text-danger"><%= message %></div>
+            <% end %>
+        </div>
+        <% end %>
+        <%= blog.text_field :category, class:'form-control titleForm mt-2', placeholder: 'Enter categories, by separating with a comma. '%>
+        <% if @blog.errors.any? %>
+            <div class="text">
+                <% @blog.errors.full_messages_for(:title).each do |message| %>
+                    <div class="text-danger"><%= message %></div>
+                <% end %>
+            </div>
+        <% end %>
+        <div class="button">
+        <%= blog.submit class: 'btn btn-primary mt-4'%>
+        </div>
+    <% end %>   
+</div>

@@ -1,0 +1,14 @@
+<% @comment.each do |x|%>
+  <div class="d-flex mt-3">
+    <% if x.user.image.attached? %>
+    <div class="flex-shrink-0"><%= image_tag(x.user.image, class: 'rounded-circle', width: '50')%></div>
+    <% else %>
+    <div class="flex-shrink-0"><%= image_tag('img/pen.png', width: '50')%></div>
+    <% end %>
+    <div class="ms-3">
+        <div class="fw-bold"><%= x.user.email %></div>
+        <%= x.title %>
+    </div>
+    <%= button_to 'Delete', [x.blog, x], class: 'btn btn-danger btn-sm mx-3 ',method: :delete, data: {'turbo-method': :delete}, data: { turbo: "false" } if x.user_id == current_user.id || current_user.id == @blog.user.id%>
+  </div>
+<% end %>

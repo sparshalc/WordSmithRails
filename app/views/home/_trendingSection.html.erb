@@ -1,0 +1,109 @@
+<style>
+  .viewText{
+    font-size: 18px;
+    font-weight: 500;
+  }
+  .viewSpan{
+    font-size: 25px;
+    font-weight: 900;
+  }
+  .trendingTextTitle{
+    background: linear-gradient(#3a8ff7c8, #2382f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 900;
+  }
+  .listRem{
+      list-style-type: none;
+  }
+  .userEmail{
+    font-weight: 900;
+    font-size: 18px;
+  }
+  .userImage{
+    border-radius: 50%;
+
+  }
+  .trendBlog{
+    border-radius: 15px;
+  }
+  .uiContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+</style>
+<section id="posts" class="posts mt-5">
+    <div class="container aos-init aos-animate" data-aos="fade-up">
+      <div data-aos="fade-up" data-aos-delay="300" class="row g-5">
+        <div class="col-lg-4">
+          <h3 class="trendingTextTitle">Random Blog</h3>
+          <% @blog.limit(1).order("RANDOM()").each do |x|%>
+            <div class="post-entry-1 lg">
+              <a><%= link_to image_tag(x.image, class:'img-fluid', style: 'border-radius: 15px;'), blog_path(x.id)%></a>
+              <div class="post-meta"><span class="text-muted">Estimated Time to Read <%= x.description.scan(/\S+/).size * 0.008 %> min</span> <span class="mx-1">•</span> <span class="text-muted"><%= x.created_at.strftime('%F')%></span></div>
+              <h3><a><%= link_to x.title.length> 30 ? x.title.first(30).. : x.title, blog_path(x.id), class:'trendingText mt-3' %></h3>
+              <p class="mb-4 d-block "><%= x.description.first(650)... %></p>
+              <div class="d-flex align-items-center author">
+                <div class="photo"><img src="assets/img/person-1.jpg" alt="" class="img-fluid"></div>
+                <div>
+                  <h2 class="viewText text-muted"> <span class="viewSpan"><%= (x.views)%></span> Views</h2>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <div class="col-lg-8">
+          <div class="row g-5">
+
+              <div class="col-lg-4 border-start custom-border">
+                <h3 class="trendingTextTitle">Trending <br> Blogs</h3>
+                <% @blog.limit(3).each do |x|%>
+                  <div class="post-entry-1 mt-3">
+                    <a ><%= link_to image_tag(x.image, class: 'img-fluid trendBlog') , blog_path(x.id)%></a>
+                    <div class="post-meta"><span class="date text-muted"><%= pluralize(x.views, 'view')%></span> <span class="mx-1">•</span> <span class="text-muted"><%= time_ago_in_words(x.created_at)  + ' ago'%></span></div>
+                    <h5 class="mt-1"><a ><%= link_to x.title.length> 30 ? x.title.first(30).. : x.title, blog_path(x.id), class:'trendingText' %>
+                    </a></h5>
+                  </div>
+                  <% end %>
+                  <%= link_to 'View All...', blogs_path, class:'link, text-primary'%>
+              </div>
+            <div class="col-lg-4 border-start custom-border">
+              <h3 class="trendingTextTitle">Recently Published</h3>
+              <% @blogs.limit(3).each do |x|%>
+              <div class="post-entry-1 mt-3">
+                <a ><%= link_to image_tag(x.image, class: 'img-fluid trendBlog') , blog_path(x.id)%></a>
+                <div class="post-meta"><span class="date text-muted"><%= pluralize(x.views, 'view')%></span> <span class="mx-1">•</span> <span class="text-muted"><%= time_ago_in_words(x.created_at)  + ' ago'%></span></div>
+                <h5 class="mt-1"><a ><%= link_to x.title.length> 30 ? x.title.first(30).. : x.title, blog_path(x.id), class:'trendingText' %>
+                </a></h5>
+              </div>
+              <% end %>
+            </div>
+            <div class="col-lg-4">
+
+              <div class="trending">
+                <h3 class="trendingTextTitle">Trending <br> Users<%= image_tag('img/trendingLogo.png', width: '30px')%></h3>
+                <ul class="trending-post">
+                    <% @user.limit(4).each do |x|%>
+                        <li class="mt-4 listRem">
+                            <a>
+                              <div class="uiContainer my-2">
+                                 <%= link_to image_tag(x.image, width: '55px ', class:'userImage'), user_path(x.id)%>
+                              </div>
+                            <h5 class="userEmail"><%= link_to x.email, user_path(x.id) , class: 'text-dark'%></h5>
+                            <div><span class="date text-muted">Joined <%= time_ago_in_words(x.created_at) + ' ago'%> | Published <%= x.blogs.count %> Blogs</span></div>
+                            </a>
+                        </li>
+                        <hr>
+                    <% end %>
+                </ul>
+              </div>
+
+            </div> 
+          </div>
+        </div>
+
+      </div>
+    </div>
+</section>

@@ -1,0 +1,62 @@
+<style>
+.bg-custom{
+    background: linear-gradient(#3a8ff7c8, #2e89f8);
+    height: 32px;
+}
+.loginText{
+    font-weight: 500;
+}
+.fa-user{
+    color: white;
+}
+.linkTop{
+    font-weight: 500;
+}
+.smallIcon{
+    color: white;
+    font-size: 15px;
+}
+</style>
+<nav class="navbar navbar-expand-lg navbar-dark bg-custom">
+    <div class="container">
+        <button class="navbar-toggler text-white" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarButtonsExample" aria-controls="navbarButtonsExample" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarButtonsExample">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item me-3 me-lg-0">
+                    <a class="nav-link" href="#">
+                        <i class="fab fa-facebook-f text-white"></i>
+                    </a>
+                </li>
+                <li class="nav-item me-3 me-lg-0">
+                    <a class="nav-link" href="#">
+                        <i class="fab fa-instagram text-white"></i>
+                    </a>
+                </li>
+                <li class="nav-item me-3 me-lg-0">
+                    <a class="nav-link" href="#">
+                        <i class="fab fa-linkedin text-white"></i>
+                    </a>
+                </li>
+                <li class="nav-item me-3 me-lg-0">
+                    <a class="nav-link" href="#">
+                        <i class="fab fa-github text-white"></i>
+                    </a>
+                </li>
+                <li class="nav-item me-3 me-lg-0">
+                    <a class="nav-link" href="#">
+                        <i class="fab fa-twitter text-white"></i>
+                    </a>
+                </li>
+            </ul>
+            <ul class="navbar-nav d-flex flex-row mx-5 ">
+                <% if !user_signed_in? %>
+                <i class="fa fa-lg fa-user mx-2"></i><%= link_to 'Login', user_session_path, class: 'loginText'%>
+                <% else %>
+                <i class="fa fa-lg fa-info mx-2 mt-1 smallIcon"></i><%= link_to 'About Us', about_us_path, class:'linkTop'%>
+                <% end %>
+            </ul>
+        </div>
+    </div>
+</nav>

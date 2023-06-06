@@ -1,0 +1,181 @@
+<style>
+    #hero{
+        background: linear-gradient(#3a8ff7c8, #2382f6);
+        overflow: hidden; 
+        height: 64vh;
+    }
+    .headerText{
+        color: white;
+        font-weight: 600;
+        font-size: 100px;
+    }
+    .headerText span{
+        font-weight: 800;
+    }
+    p.headerParagraph{
+        color: white;
+        font-size: 20px;
+    }
+    .custom{
+        background: linear-gradient(#2476dac1, #327cd7c0);
+        color: white;
+        border: 0;
+        outline: 0;
+        padding: 12px 15px;
+        border-radius: 8px;
+        text-decoration: none;
+    }
+    .headerButton{
+        margin-top: 15px;
+    }
+    .section-title{
+        margin-top: 10px;
+        padding: 20px 20px;
+    }
+    .trendingPost{
+        padding: 10px 10px;
+    }
+    .col{
+        margin: 0px 0px;
+        padding: 5px;
+    }
+    .fa-fire{
+        width: 48px;
+        height: 48px;
+        color: rgb(231, 44, 44);
+    }
+    .section-title span{
+        font-weight: 900;
+    }
+    .subscribe{
+        background: linear-gradient(#2269c0c8, #2382f6);
+        border-radius: 15px;
+        margin: 25px 25px;
+    }
+    .h1{
+        color: white;
+    }
+    .custom{
+        background: linear-gradient(#2475d8c1, #327cd7c0);
+        color: white;
+        border: 0;
+        outline: 0;
+        padding: 12px 15px;
+        border-radius: 8px;
+        text-decoration: none;
+    }
+    .cc{
+        color: white;
+    }
+    a{
+        text-decoration: none;
+        color: rgb(248, 248, 248);
+        font-weight: 700;
+    }
+    .subscribeNow{
+        color: white;
+        font-size: 40px;
+        font-weight: 600;
+
+    }
+    .notSubscribed{
+        color: white;
+        font-size: 55px;
+    }
+    .subsParagraph{
+        color: white;
+        font-size: 20px;
+    }
+    .bg{
+      background: linear-gradient(to right , #2e83ebc1, #256bc1c0);
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-position: center;
+      padding: 20px 20px;
+    }
+    .trendingLogo{
+      width: 80px;
+      height: 80px;
+    }
+    .trendingText{
+      color: black;
+    }
+    .img-fluid{
+        scale: 0.98;
+    }
+    .img-fluid:hover{
+        scale: 1.0;
+    }
+    .badge{
+      position: absolute;
+      z-index: 99;
+      top: 0px;
+      right: 0px;
+    }
+</style>
+<section id="hero" class="hero d-flex align-items-center section-bg">
+    <div class="container">
+      <div class="row justify-content-between gy-5">
+        <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center align-items-center align-items-lg-start text-center text-lg-start">
+          <% if !user_signed_in? %>
+          <h1 class="headerText" data-aos="fade-up"><span>Stay</span><br>Creative!</h1>
+          <% else %>
+          <h2 class="headerText" data-aos="fade-up"><span>Create your <br> Space</span> </h2>
+          <% end %>
+          <p class="headerParagraph" data-aos="fade-up" data-aos-delay="100">Unleashing the Power of Words: Inspire, Explore, and Connect.</p>
+          <% if user_signed_in? %>
+          <div data-aos="fade-up" data-aos-delay="200" class="headerButton">
+            <%= link_to 'Start Reading', blogs_path, class:'custom'%>
+          </div>
+          <% else %>
+          <div data-aos="fade-up" data-aos-delay="200" class="headerButton">
+            <%= link_to 'Login to start Reading', blogs_path, class:'custom'%>
+          </div>
+          <% end %>
+        </div>
+        <% if !user_signed_in? %>
+        <div class="col-lg-5 order-1 order-lg-2 text-center text-lg-start">
+          <%= image_tag('img/book.gif', width: 'auto', 'data-aos': "zoom-out", 'data-aos-delay': "300")%>
+        </div>
+        <% else %>
+          <div class="col-lg-5 order-1 order-lg-2 text-center text-lg-start">
+            <%= image_tag('img/think.gif', width: '700px', 'data-aos': "zoom-out", 'data-aos-delay': "300")%>
+          </div>
+        <% end %>
+      </div>
+    </div>
+</section>
+<% if @blog.count >= 3%>
+  <%= render 'home/trendingSection'%>
+<% end %>
+<%= render 'home/aboutUs'%>
+<%= render 'home/memoriesSection'%>
+<%= render 'home/joinNow'%>
+
+<section class="subscribe pt-2 pb-4 pb-lg-5 mt-5">
+    <div class="container text-center pt-md-4 pt-lg-5 pb-xl-3">
+      <div class="row justify-content-center ">
+        <div class="col-xl-6 col-lg-7 col-md-9 col-sm-11">
+          <h2 data-aos="fade-up" data-aos-delay="100" class="notSubscribed" ><strong> Not  subscribed yet? </strong></i></h2>
+          <p data-aos="fade-up" data-aos-delay="200" class="subsParagraph ">Subscribe right away to receive updates and news faster than anyone else.</p>
+          <form class="subscription-form position-relative validate mt-5 " action="https://formspree.io/f/xpzegwzj" method="post" name="mc-embedded-subscribe-form" target="_blank" novalidate="">
+            <div class="d-flex flex-column flex-sm-row">
+              <div class="position-relative w-100 mb-3 mb-sm-0 me-sm-3">
+                <input data-aos="fade-up" data-aos-delay="100" class="form-control form-control-lg ps-5" type="email" name="email" placeholder="Your email" required="">
+                <i class="bx bx-envelope fs-xl text-muted position-absolute top-50 start-0 translate-middle-y ms-3"></i>
+              </div>
+              <button data-aos="fade-up" data-aos-delay="100" class="btn btn-primary shadow-primary btn-lg custom" type="submit" name="subscribe">Subscribe</button>
+            </div>
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+              <input class="subscription-form-antispam" type="text" name="b_c7103e2c981361a6639545bd5_29ca296126" tabindex="-1">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+</section> 
+
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+  AOS.init();
+</script>
