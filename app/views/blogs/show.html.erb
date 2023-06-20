@@ -41,7 +41,7 @@
                         <div class="input-group">
                                 <div class="d-flex">
                                         <%= link_to 'Edit' , edit_blog_path(@blog.id), class:'btn btn-dark mx-1'%>
-                                            <%= button_to 'Destroy' , blog_path(@blog.id), class:'btn btn-danger', data:
+                                        <%= button_to 'Destroy' , blog_path(@blog.id), class:'btn btn-danger', data:
                                                 {'turbo-method': :delete}, data: { turbo: "false" }, method: :delete%>
                                 </div>
                         </div>

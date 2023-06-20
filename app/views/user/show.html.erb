@@ -6,6 +6,13 @@
         <h1 class="text-white fs-3 fw-bolder"><%= @user.email %></h1>
         <p class="text-white-50 mb-0">Joined <%= time_ago_in_words(@user.created_at) + ' ago'%></p>
         <p class="text-white-50 mb-0">Published <%= @user.blogs.count %> Blog</p>
+            <% if current_user.following?(@user) %>
+                <%= button_to "Unfollow" , unfollow_path(@user), class:'btn btn-danger' %>
+                <% elsif current_user.sent_follow_request_to?(@user)%>
+                <%= button_to "Cancel follow request" , cancel_path(@user), class:'btn btn-danger' %>
+                <% else %>
+                <%= button_to "Follow" , follow_path(@user), class:'btn btn-dark' %>
+            <% end %>
     </div>
 </header>
 <section id="posts" class="posts mt-5">

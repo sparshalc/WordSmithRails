@@ -130,7 +130,7 @@
           <% else %>
           <div data-aos="fade-up" data-aos-delay="200" class="headerButton">
             <%= link_to 'Login to start Reading', blogs_path, class:'custom'%>
-          </div>
+          </div>  
           <% end %>
         </div>
         <% if !user_signed_in? %>
@@ -161,7 +161,7 @@
           <form class="subscription-form position-relative validate mt-5 " action="https://formspree.io/f/xpzegwzj" method="post" name="mc-embedded-subscribe-form" target="_blank" novalidate="">
             <div class="d-flex flex-column flex-sm-row">
               <div class="position-relative w-100 mb-3 mb-sm-0 me-sm-3">
-                <input data-aos="fade-up" data-aos-delay="100" class="form-control form-control-lg ps-5" type="email" name="email" placeholder="Your email" required="">
+                <input  class="form-control form-control-lg ps-5" type="email" name="email" placeholder="Your email" required="">
                 <i class="bx bx-envelope fs-xl text-muted position-absolute top-50 start-0 translate-middle-y ms-3"></i>
               </div>
               <button data-aos="fade-up" data-aos-delay="100" class="btn btn-primary shadow-primary btn-lg custom" type="submit" name="subscribe">Subscribe</button>

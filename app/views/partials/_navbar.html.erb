@@ -23,6 +23,9 @@
             <%= link_to 'Home', root_path, class:'nav-link px-3 link-body-emphasis'%>
             <%= link_to 'Write', new_blog_path, class:'nav-link px-3 link-body-emphasis'%>
             <%= link_to 'Blogs', blogs_path, class:'nav-link px-3 link-body-emphasis'%>
+            <% if current_user.followers != 0 %>
+              <%= link_to 'For You', activity_foryou_path, class:'nav-link px-3 link-body-emphasis'%>
+            <% end %>
           </ul>
 
           <% if params[:controller] == 'blogs' && params[:action] == 'index' %>
@@ -33,7 +36,7 @@
             </form>
           <% else %>
           <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 mt-3">
-            <p><strong><%= current_user.email %></strong></p>
+            <p><strong><%=current_user.email%></strong></p>
           </form>
           <% end %>
         <% end %>
@@ -41,10 +44,15 @@
           <% if current_user.image.attached? %>
           <div class="dropdown text-end">
             <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            <%= image_tag(current_user.image, width:"32", height:"32", class:"rounded-circle")%>
+              <%= image_tag(current_user.image, width:"32", height:"32", class:"rounded-circle position-absolute")%>
             </a>
             <ul class="dropdown-menu text-small">
             <li><%= link_to 'Settings', main_app.edit_user_registration_path,class:"dropdown-item"%></li>
+            <% if current_user.follow_requests.present? %>
+            <li><%= link_to "Activity Log 🔴", main_app.activity_logs_path,class:"dropdown-item position-relative"%></li>
+            <% else %>
+            <li><%= link_to 'Activity Log', main_app.activity_logs_path,class:"dropdown-item  position-relative"%></li>
+            <% end %>
             <li> <%= button_to 'Logout',main_app.destroy_user_session_path,class:'dropdown-item text-danger',method: :delete%></li>
             </ul>
             </div>

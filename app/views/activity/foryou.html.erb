@@ -1,0 +1,76 @@
+<style>
+    .img-fluid{
+        scale: 0.98;
+    }
+    .img-fluid:hover{
+        scale: 1.0;
+    }
+    .blogImage{
+        width: 900px;
+        height: 300px;
+        object-fit: cover;
+
+    }
+    .bg-image {
+        width: auto;
+        height: 300px;
+    }
+    h3.mainHeadline{
+        font-size: 36px;
+        background: linear-gradient(#3a8ff7c8, #2382f6);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: 700;
+    }
+    .centerText{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    p.centerText{
+        font-size: 20px;
+    }
+    .addBlog{
+        text-decoration: none;
+        font-weight: 400;
+        background: linear-gradient(#3a8ff7c8, #2382f6);
+        border-radius: 15px;
+        color: white;
+        padding: 10px 15px;
+        font-size: 15px;
+    }
+</style>
+
+<% if @blog.count > 0 %>
+    <section id="posts" class="posts mt-5">
+        <div class="container" >
+            <div class="row">
+                <% @blog.each do |blog|%>
+                    <div class="col-lg-4 col-md-12 mb-4">
+                    <div class="card">
+                        <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                        <%= link_to image_tag(blog.image, class: "img-fluid blogImage", width: 'auto', height: '250px'), blog_path(blog.id)%>
+                        <a href="#!">
+                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                        </a>
+                        </div>
+                        <div class="card-body">
+                        <h5 class="card-title"><%= link_to blog.title.length > 33 ? blog.title.first(33).. : blog.title, blog_path(blog.id) %></h5>
+                        <p class="card-text m-0 p-0">
+                            <%= blog.description.length > 200 ? blog.description.first(200).. : blog.description %>
+                        </p>
+                        </div>
+                        <hr>
+                        <div class="text-muted mx-2 text-center">Published <%= time_ago_in_words(blog.created_at) + ' ago'%> | <%= pluralize(blog.views, 'view')%></div>
+                    </div>
+                </div>
+            <% end %>
+    </section>
+<% else %>
+    <div class="text-center" style="display: flex; flex-direction: column;">
+        <h3 class="mainHeadline text-center mt-5"> Oops! seems like you haven't followed any one.</h3>
+        <h3 class="mainHeadline text-center"> or your followes hasn't made any post yet!</h3>
+        <%= link_to 'Return Home ', root_path , class: 'custom mt-4 '%>
+    </div>
+<% end %>
+
