@@ -23,9 +23,11 @@
             <%= link_to 'Home', root_path, class:'nav-link px-3 link-body-emphasis'%>
             <%= link_to 'Write', new_blog_path, class:'nav-link px-3 link-body-emphasis'%>
             <%= link_to 'Blogs', blogs_path, class:'nav-link px-3 link-body-emphasis'%>
-            <% if current_user.followers != 0 %>
+            <% if current_user.followers.present? %>
               <%= link_to 'For You', activity_foryou_path, class:'nav-link px-3 link-body-emphasis'%>
             <% end %>
+            <%= link_to 'Discover', activity_discover_path, class:'nav-link px-3 link-body-emphasis'%>
+
           </ul>
 
           <% if params[:controller] == 'blogs' && params[:action] == 'index' %>
@@ -47,6 +49,7 @@
               <%= image_tag(current_user.image, width:"32", height:"32", class:"rounded-circle position-absolute")%>
             </a>
             <ul class="dropdown-menu text-small">
+            <li><%= link_to 'Profile', user_path(current_user),class:"dropdown-item"%></li>
             <li><%= link_to 'Settings', main_app.edit_user_registration_path,class:"dropdown-item"%></li>
             <% if current_user.follow_requests.present? %>
             <li><%= link_to "Activity Log 🔴", main_app.activity_logs_path,class:"dropdown-item position-relative"%></li>

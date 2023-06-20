@@ -1,0 +1,41 @@
+<style>
+
+  #hero{
+      background: linear-gradient(#3a8ff7c8, #2382f6);
+      overflow: hidden; 
+      height: 64vh;
+  }
+  .headerText{
+      color: white;
+      font-weight: 600;
+      font-size: 100px;
+  }
+  .headerText span{
+      font-weight: 800;
+  }
+  p.headerParagraph{
+      color: white;
+      font-size: 20px;
+      font-size: 20px;
+  }
+  .h1{
+      color: white;
+  }
+</style>
+
+<section id="hero" class="hero d-flex align-items-center section-bg">
+  <div  class="container">
+    <div class="row justify-content-between gy-5">
+      <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center align-items-center align-items-lg-start text-center text-lg-start">
+        <h1 class="headerText" ><span>All Users<br>In one Place</span></h1>
+        <p class="headerParagraph">"Active Word Smith Users"</p>
+      </div>
+      <div class="col-lg-5 order-1 order-lg-2 text-center text-lg-start">
+        <%= image_tag('img/u.png', width: '650px')%>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+

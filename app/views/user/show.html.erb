@@ -1,18 +1,20 @@
 <header class="py-5 bg-image-full" style="background-image: url('https://source.unsplash.com/wfh8dDlNFOk/1600x900')">
     <div class="text-center my-5">
         <div class="userImage">
-            <%= image_tag(@user.image, class:'img-fluid rounded-circle mb-4',  width: '300px')%>
+            <%= image_tag(@user.image, class:'img-fluid rounded-circle mb-4',  width: '250px')%>
         </div>
         <h1 class="text-white fs-3 fw-bolder"><%= @user.email %></h1>
-        <p class="text-white-50 mb-0">Joined <%= time_ago_in_words(@user.created_at) + ' ago'%></p>
-        <p class="text-white-50 mb-0">Published <%= @user.blogs.count %> Blog</p>
+        <p class="text-white-50 mb-0">Joined <%= time_ago_in_words(@user.created_at) + ' ago'%>  |  Published <%= @user.blogs.count %> Blog</p>
+        <p class="text-white-50 mb-0 mt-1"><%= @user.followers.count %> Followers</p>
+        <% if current_user.id != @user.id %>
             <% if current_user.following?(@user) %>
-                <%= button_to "Unfollow" , unfollow_path(@user), class:'btn btn-danger' %>
+                <%= button_to "Unfollow" , unfollow_path(@user), class:'btn btn-danger mt-2' %>
                 <% elsif current_user.sent_follow_request_to?(@user)%>
-                <%= button_to "Cancel follow request" , cancel_path(@user), class:'btn btn-danger' %>
+                <%= button_to "Cancel follow request" , cancel_path(@user), class:'btn btn-danger mt-2' %>
                 <% else %>
                 <%= button_to "Follow" , follow_path(@user), class:'btn btn-dark' %>
             <% end %>
+        <% end %>
     </div>
 </header>
 <section id="posts" class="posts mt-5">

@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get 'activity/logs'
   get 'activity/foryou'
+  get 'activity/discover'
   get 'about/us'
   post 'user/:id/follow', to: 'user#follow', as: 'follow'
   post 'user/:id/unfollow', to: 'user#unfollow', as: 'unfollow'

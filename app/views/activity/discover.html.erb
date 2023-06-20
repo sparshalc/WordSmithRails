@@ -1,0 +1,13 @@
+<%= render 'activity/carousel'%>
+<div class="container mt-3">
+    <div class="row text-center">
+        <% @user.each do |x| %>
+            <div class="col-lg-4 mt-3 border p-1">
+            <%= link_to image_tag(x.image ,class:"bd-placeholder-img rounded-circle", width:"100", height:"100" ) , user_path(x) %>
+            <h5 class="fw-normal mt-2"><b><%= link_to x.email, user_path(x) %></b></h5>
+            <p class="text-muted">Joined <%= time_ago_in_words(x.created_at) + ' ago'%>  | Published <%= x.blogs.count %> Blogs</p>
+            <p class="text-muted"><%= x.followers.count %> Followers </p>
+            </div>
+        <% end %>
+    </div>
+</div>

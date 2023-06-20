@@ -6,4 +6,7 @@ class ActivityController < ApplicationController
     @user = current_user.following.find_by(params[:id])
     @blog = @user.blogs.all
   end
+  def discover
+    @user = User.all
+  end
 end

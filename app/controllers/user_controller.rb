@@ -15,18 +15,17 @@ class UserController < ApplicationController
     make_it_a_unfriend_request
 
     current_user.unfollow(@user)
-    redirect_to user_path
   end
 
   def accept
     current_user.accept_follow_request_of(@user)
     make_it_a_friend_request
-    redirect_to root_path, notice: "You have started following #{@user.email}."
+    redirect_to activity_logs_path, notice: "You have started following #{@user.email}."
   end
 
   def decline
     current_user.decline_follow_request_of(@user)
-    redirect_to root_path, alert: "Follow request of #{@user.email} declined."
+    redirect_to activity_logs_path, alert: "Follow request of #{@user.email} declined."
   end
 
   def cancel
@@ -43,7 +42,7 @@ class UserController < ApplicationController
 
   def make_it_a_unfriend_request
     @user.unfollow(current_user) if @user.mutual_following_with?(current_user)
-    flash[:alert] =  "#{@user.email} removed from your following list"
+    redirect_to activity_logs_path, alert: "#{@user.email} removed from your following list"
   end
 
   def set_user
